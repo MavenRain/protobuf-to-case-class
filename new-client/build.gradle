@@ -7,7 +7,7 @@ buildscript {
     scalaVersionMajor = '2.13'
   }
   repositories {
-      mavenCentral()
+    mavenCentral()
   }
   dependencies {
   }
