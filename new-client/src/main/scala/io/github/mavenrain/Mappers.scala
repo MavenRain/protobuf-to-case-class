@@ -27,7 +27,7 @@ object Mappers {
   private val contractMapper =
     new ObjectMapper()
       .registerModule(new ProtobufModule)
-      .configure(CLOSE_CLOSEABLE, false)
+      .configure(CLOSE_CLOSEABLE, true)
       .configure(FAIL_ON_EMPTY_BEANS, false)
       .configure(FAIL_ON_INVALID_SUBTYPE, false)
       .configure(FAIL_ON_SELF_REFERENCES, false)
@@ -42,7 +42,7 @@ object Mappers {
       .builder()
       .addModule(DefaultScalaModule)
       .build()
-      .configure(CLOSE_CLOSEABLE, false)
+      .configure(CLOSE_CLOSEABLE, true)
       .configure(FAIL_ON_EMPTY_BEANS, false)
       .configure(FAIL_ON_INVALID_SUBTYPE, false)
       .configure(FAIL_ON_SELF_REFERENCES, false)
