@@ -5,6 +5,7 @@ buildscript {
     jacksonDatatypeProtobuf = '0.9.12'
     scalaVersion = '2.13.5'
     scalaVersionMajor = '2.13'
+    shapelessVersion = '2.3.4'
   }
   repositories {
     mavenCentral()
@@ -23,6 +24,7 @@ repositories {
 }
 
 dependencies {
+  implementation "com.chuusai:shapeless_2.13:$shapelessVersion"
   implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind"
   implementation "com.fasterxml.jackson.module:jackson-module-scala_$scalaVersionMajor:$jacksonDatabind"
   implementation "com.hubspot.jackson:jackson-datatype-protobuf:$jacksonDatatypeProtobuf"

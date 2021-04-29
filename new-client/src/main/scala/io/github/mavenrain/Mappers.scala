@@ -1,5 +1,6 @@
 package io.github.mavenrain
 
+import com.google.protobuf.GeneratedMessageV3
 import com.fasterxml.jackson.databind.DeserializationFeature.{
   FAIL_ON_INVALID_SUBTYPE, FAIL_ON_UNKNOWN_PROPERTIES,
   FAIL_ON_UNRESOLVED_OBJECT_IDS, READ_UNKNOWN_ENUM_VALUES_AS_NULL
@@ -14,13 +15,14 @@ import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hubspot.jackson.datatype.protobuf.ProtobufModule
 import scala.util.chaining.scalaUtilChainingOps
+import shapeless.Generic
 
 object Mappers {
-  def mapToDomain[S, T](request: S, reference: Class[T]): T =
+  def mapToDomain[S <: GeneratedMessageV3, T](request: S, reference: Class[T])(implicit evidence: Generic[T]): T =
     request
       .pipe(contractMapper.writeValueAsString(_))
       .pipe(domainMapper.readValue(_, reference))
-  def mapToContract[S, T](request: S, reference: Class[T]): T =
+  def mapToContract[S, T <: GeneratedMessageV3](request: S, reference: Class[T])(implicit evidence: Generic[S]): T =
     request
       .pipe(domainMapper.writeValueAsString(_))
       .pipe(contractMapper.readValue(_, reference))
