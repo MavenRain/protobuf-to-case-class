@@ -16,7 +16,7 @@ buildscript {
 apply plugin: 'scala'
 apply plugin: 'application'
 
-mainClassName = "HelloWorldClient"
+mainClassName = "io.github.mavenrain.HelloWorldClient"
 
 repositories {
   mavenCentral()

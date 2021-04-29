@@ -1,3 +1,6 @@
+package io.github.mavenrain
+
+import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -17,25 +20,35 @@ object HelloWorldClient extends App {
   private implicit object ReleasableChannel extends Releasable[ManagedChannel] {
     def release(resource: ManagedChannel): Unit = resource.shutdown().awaitTermination(1, TimeUnit.SECONDS)
   }
-  private val contractMapper = new ObjectMapper().registerModule(new ProtobufModule)
-  private val domainMapper = JsonMapper.builder().addModule(DefaultScalaModule).build()
+  private val contractMapper = new ObjectMapper().registerModule(new ProtobufModule).configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
+  private val domainMapper = JsonMapper.builder().addModule(DefaultScalaModule).build().configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
   private def mapToDomain[S, T](request: S, reference: Class[T]): T =
     request
       .pipe(contractMapper.writeValueAsString(_))
       .pipe(domainMapper.readValue(_, reference))
+  private def mapToContract[S, T](request: S, reference: Class[T]): T =
+    request
+      .pipe(domainMapper.writeValueAsString(_))
+      .pipe(contractMapper.readValue(_, reference))
   Manager { use =>
     val channel = use(ManagedChannelBuilder.forAddress("localhost", 8082).usePlaintext().build())
     val blockingStub = GreeterGrpc.newBlockingStub(channel)
-    val request =
+    val contractRequest =
       HelloRequest
         .newBuilder()
         .setName("Steve")
         .setValue(42)
         .setAlive(true)
         .build()
-    println(mapToDomain(request, classOf[DomainRequest]))
+    val domainRequest = DomainRequest(name = "Wally", value = 24, alive = false)
+    val contractRequestFromDomain = mapToContract(domainRequest, classOf[HelloRequest])
+    println(s"From converted contract request:")
+    println(s"Name = ${contractRequestFromDomain.getName()}")
+    println(s"Value = ${contractRequestFromDomain.getValue()}")
+    println(s"Alive = ${contractRequestFromDomain.getAlive()}")
+    println(mapToDomain(contractRequest, classOf[DomainRequest]))
     println("Calling server")
-    val response = blockingStub.sayHello(request)
+    val response = blockingStub.sayHello(contractRequest)
     println("Server called")
     println(s"Response from server: ${response.getMessage}")
   }.getOrElse(())
