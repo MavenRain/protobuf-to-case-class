@@ -4,6 +4,7 @@ buildscript {
     jacksonDatabind = '2.12.3'
     jacksonDatatypeProtobuf = '0.9.12'
     scalaVersion = '2.13.5'
+    scalaVersionMajor = '2.13'
   }
   repositories {
       mavenCentral()
@@ -23,6 +24,7 @@ repositories {
 
 dependencies {
   implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind"
+  implementation "com.fasterxml.jackson.module:jackson-module-scala_$scalaVersionMajor:$jacksonDatabind"
   implementation "com.hubspot.jackson:jackson-datatype-protobuf:$jacksonDatatypeProtobuf"
   implementation "io.grpc:grpc-netty:$grpcVersion"
   implementation "io.grpc:grpc-protobuf:$grpcVersion"
