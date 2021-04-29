@@ -1,15 +1,15 @@
 buildscript {
-    ext {
-      scalaVersion = '2.13.5'
-      grpcVersion = '1.37.0'
-    }
-
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-
-    }
+  ext {
+    grpcVersion = '1.37.0'
+    jacksonDatabind = '2.12.3'
+    jacksonDatatypeProtobuf = '0.9.12'
+    scalaVersion = '2.13.5'
+  }
+  repositories {
+      mavenCentral()
+  }
+  dependencies {
+  }
 }
 
 apply plugin: 'scala'
@@ -18,13 +18,15 @@ apply plugin: 'application'
 mainClassName = "HelloWorldClient"
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    implementation "io.grpc:grpc-netty:$grpcVersion"
-    implementation "io.grpc:grpc-protobuf:$grpcVersion"
-    implementation "io.grpc:grpc-stub:$grpcVersion"
-    implementation "org.scala-lang:scala-library:$scalaVersion"
-    implementation project(':proto')
+  implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind"
+  implementation "com.hubspot.jackson:jackson-datatype-protobuf:$jacksonDatatypeProtobuf"
+  implementation "io.grpc:grpc-netty:$grpcVersion"
+  implementation "io.grpc:grpc-protobuf:$grpcVersion"
+  implementation "io.grpc:grpc-stub:$grpcVersion"
+  implementation "org.scala-lang:scala-library:$scalaVersion"
+  implementation project(':proto')
 }

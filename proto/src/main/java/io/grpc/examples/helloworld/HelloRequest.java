@@ -59,6 +59,16 @@ private static final long serialVersionUID = 0L;
             name_ = s;
             break;
           }
+          case 16: {
+
+            value_ = input.readInt32();
+            break;
+          }
+          case 24: {
+
+            alive_ = input.readBool();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -129,6 +139,28 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int VALUE_FIELD_NUMBER = 2;
+  private int value_;
+  /**
+   * <code>int32 value = 2;</code>
+   * @return The value.
+   */
+  @java.lang.Override
+  public int getValue() {
+    return value_;
+  }
+
+  public static final int ALIVE_FIELD_NUMBER = 3;
+  private boolean alive_;
+  /**
+   * <code>bool alive = 3;</code>
+   * @return The alive.
+   */
+  @java.lang.Override
+  public boolean getAlive() {
+    return alive_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -146,6 +178,12 @@ private static final long serialVersionUID = 0L;
     if (!getNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
     }
+    if (value_ != 0) {
+      output.writeInt32(2, value_);
+    }
+    if (alive_ != false) {
+      output.writeBool(3, alive_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -157,6 +195,14 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!getNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+    }
+    if (value_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, value_);
+    }
+    if (alive_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(3, alive_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -175,6 +221,10 @@ private static final long serialVersionUID = 0L;
 
     if (!getName()
         .equals(other.getName())) return false;
+    if (getValue()
+        != other.getValue()) return false;
+    if (getAlive()
+        != other.getAlive()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -188,6 +238,11 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + NAME_FIELD_NUMBER;
     hash = (53 * hash) + getName().hashCode();
+    hash = (37 * hash) + VALUE_FIELD_NUMBER;
+    hash = (53 * hash) + getValue();
+    hash = (37 * hash) + ALIVE_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getAlive());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -327,6 +382,10 @@ private static final long serialVersionUID = 0L;
       super.clear();
       name_ = "";
 
+      value_ = 0;
+
+      alive_ = false;
+
       return this;
     }
 
@@ -354,6 +413,8 @@ private static final long serialVersionUID = 0L;
     public io.grpc.examples.helloworld.HelloRequest buildPartial() {
       io.grpc.examples.helloworld.HelloRequest result = new io.grpc.examples.helloworld.HelloRequest(this);
       result.name_ = name_;
+      result.value_ = value_;
+      result.alive_ = alive_;
       onBuilt();
       return result;
     }
@@ -405,6 +466,12 @@ private static final long serialVersionUID = 0L;
       if (!other.getName().isEmpty()) {
         name_ = other.name_;
         onChanged();
+      }
+      if (other.getValue() != 0) {
+        setValue(other.getValue());
+      }
+      if (other.getAlive() != false) {
+        setAlive(other.getAlive());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -507,6 +574,68 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       name_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int value_ ;
+    /**
+     * <code>int32 value = 2;</code>
+     * @return The value.
+     */
+    @java.lang.Override
+    public int getValue() {
+      return value_;
+    }
+    /**
+     * <code>int32 value = 2;</code>
+     * @param value The value to set.
+     * @return This builder for chaining.
+     */
+    public Builder setValue(int value) {
+      
+      value_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 value = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearValue() {
+      
+      value_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private boolean alive_ ;
+    /**
+     * <code>bool alive = 3;</code>
+     * @return The alive.
+     */
+    @java.lang.Override
+    public boolean getAlive() {
+      return alive_;
+    }
+    /**
+     * <code>bool alive = 3;</code>
+     * @param value The alive to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAlive(boolean value) {
+      
+      alive_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool alive = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAlive() {
+      
+      alive_ = false;
       onChanged();
       return this;
     }

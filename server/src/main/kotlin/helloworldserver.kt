@@ -13,7 +13,7 @@ class GreeterImpl : GreeterGrpc.GreeterImplBase() {
 }
 
 fun main(args: Array<String>) {
-    val server = ServerBuilder.forPort(8080).addService(GreeterImpl()).build()
+    val server = ServerBuilder.forPort(8081).addService(GreeterImpl()).build()
     server.start()
     println("Server started with args: $args")
     Runtime.getRuntime().addShutdownHook(Thread() { println("Ups, JVM shutdown") })

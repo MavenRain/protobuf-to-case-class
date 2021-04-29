@@ -18,4 +18,16 @@ public interface HelloRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getNameBytes();
+
+  /**
+   * <code>int32 value = 2;</code>
+   * @return The value.
+   */
+  int getValue();
+
+  /**
+   * <code>bool alive = 3;</code>
+   * @return The alive.
+   */
+  boolean getAlive();
 }
