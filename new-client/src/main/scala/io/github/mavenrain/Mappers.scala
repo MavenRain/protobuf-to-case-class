@@ -18,6 +18,14 @@ import scala.util.chaining.scalaUtilChainingOps
 import shapeless.Generic
 
 object Mappers {
+  // Q: Why don't the return types of mapToDomain and mapToContract have to be
+  // managed by a failure-like effect (Try, Either, ZIO, Coproduct, etc.)?
+  // A: Because of a combination of how the object mappers are configured and
+  // what the type constraints on the input parameters are, one can nearly guarantee
+  // infallability.  In fact, the only reason why that assertion cannot be exhaustively
+  // unit tested is because of the size of the GeneratedMessageV3 type.  For any
+  // finite HList where each element of the HList is a child of GeneratedMessageV3,
+  // this assertion can be unit tested exhaustively with a property-based testing framework.
   def mapToDomain[S <: GeneratedMessageV3, T](request: S, reference: Class[T])(implicit evidence: Generic[T]): T =
     request
       .pipe(contractMapper.writeValueAsString(_))
