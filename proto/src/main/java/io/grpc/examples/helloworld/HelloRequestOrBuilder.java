@@ -30,4 +30,15 @@ public interface HelloRequestOrBuilder extends
    * @return The alive.
    */
   boolean getAlive();
+
+  /**
+   * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+   * @return The enum numeric value on the wire for requestedFeature.
+   */
+  int getRequestedFeatureValue();
+  /**
+   * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+   * @return The requestedFeature.
+   */
+  io.grpc.examples.helloworld.RequestedFeature getRequestedFeature();
 }

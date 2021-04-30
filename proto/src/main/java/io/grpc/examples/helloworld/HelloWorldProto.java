@@ -33,13 +33,18 @@ public final class HelloWorldProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020helloworld.proto\022\nhelloworld\":\n\014HelloR" +
+      "\n\020helloworld.proto\022\nhelloworld\"s\n\014HelloR" +
       "equest\022\014\n\004name\030\001 \001(\t\022\r\n\005value\030\002 \001(\005\022\r\n\005a" +
-      "live\030\003 \001(\010\"\035\n\nHelloReply\022\017\n\007message\030\001 \001(" +
-      "\t2I\n\007Greeter\022>\n\010SayHello\022\030.helloworld.He" +
-      "lloRequest\032\026.helloworld.HelloReply\"\000B6\n\033" +
-      "io.grpc.examples.helloworldB\017HelloWorldP" +
-      "rotoP\001\242\002\003HLWb\006proto3"
+      "live\030\003 \001(\010\0227\n\021requested_feature\030\004 \001(\0162\034." +
+      "helloworld.RequestedFeature\";\n\nHelloRepl" +
+      "y\022\017\n\007message\030\001 \001(\t\022\r\n\005value\030\002 \001(\005\022\r\n\005ali" +
+      "ve\030\003 \001(\010*g\n\020RequestedFeature\022\035\n\031REQUESTE" +
+      "D_FEATURE_INVALID\020\000\022\031\n\025REQUESTED_FEATURE" +
+      "_ONE\020\001\022\031\n\025REQUESTED_FEATURE_TWO\020\0022I\n\007Gre" +
+      "eter\022>\n\010SayHello\022\030.helloworld.HelloReque" +
+      "st\032\026.helloworld.HelloReply\"\000B6\n\033io.grpc." +
+      "examples.helloworldB\017HelloWorldProtoP\001\242\002" +
+      "\003HLWb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -50,13 +55,13 @@ public final class HelloWorldProto {
     internal_static_helloworld_HelloRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_helloworld_HelloRequest_descriptor,
-        new java.lang.String[] { "Name", "Value", "Alive", });
+        new java.lang.String[] { "Name", "Value", "Alive", "RequestedFeature", });
     internal_static_helloworld_HelloReply_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_helloworld_HelloReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_helloworld_HelloReply_descriptor,
-        new java.lang.String[] { "Message", });
+        new java.lang.String[] { "Message", "Value", "Alive", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

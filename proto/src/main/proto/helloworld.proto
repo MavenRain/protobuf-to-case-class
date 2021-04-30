@@ -18,9 +18,18 @@ message HelloRequest {
   string name = 1;
   int32 value = 2;
   bool alive = 3;
+  RequestedFeature requested_feature = 4;
 }
 
 // The response message containing the greetings
 message HelloReply {
   string message = 1;
+  int32 value = 2;
+  bool alive = 3;
+}
+
+enum RequestedFeature {
+  REQUESTED_FEATURE_INVALID = 0;
+  REQUESTED_FEATURE_ONE = 1;
+  REQUESTED_FEATURE_TWO = 2;
 }

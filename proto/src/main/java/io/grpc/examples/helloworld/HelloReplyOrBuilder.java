@@ -18,4 +18,16 @@ public interface HelloReplyOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMessageBytes();
+
+  /**
+   * <code>int32 value = 2;</code>
+   * @return The value.
+   */
+  int getValue();
+
+  /**
+   * <code>bool alive = 3;</code>
+   * @return The alive.
+   */
+  boolean getAlive();
 }

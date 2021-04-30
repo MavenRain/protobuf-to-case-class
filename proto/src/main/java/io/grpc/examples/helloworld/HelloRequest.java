@@ -21,6 +21,7 @@ private static final long serialVersionUID = 0L;
   }
   private HelloRequest() {
     name_ = "";
+    requestedFeature_ = 0;
   }
 
   @java.lang.Override
@@ -67,6 +68,12 @@ private static final long serialVersionUID = 0L;
           case 24: {
 
             alive_ = input.readBool();
+            break;
+          }
+          case 32: {
+            int rawValue = input.readEnum();
+
+            requestedFeature_ = rawValue;
             break;
           }
           default: {
@@ -161,6 +168,25 @@ private static final long serialVersionUID = 0L;
     return alive_;
   }
 
+  public static final int REQUESTED_FEATURE_FIELD_NUMBER = 4;
+  private int requestedFeature_;
+  /**
+   * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+   * @return The enum numeric value on the wire for requestedFeature.
+   */
+  @java.lang.Override public int getRequestedFeatureValue() {
+    return requestedFeature_;
+  }
+  /**
+   * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+   * @return The requestedFeature.
+   */
+  @java.lang.Override public io.grpc.examples.helloworld.RequestedFeature getRequestedFeature() {
+    @SuppressWarnings("deprecation")
+    io.grpc.examples.helloworld.RequestedFeature result = io.grpc.examples.helloworld.RequestedFeature.valueOf(requestedFeature_);
+    return result == null ? io.grpc.examples.helloworld.RequestedFeature.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -184,6 +210,9 @@ private static final long serialVersionUID = 0L;
     if (alive_ != false) {
       output.writeBool(3, alive_);
     }
+    if (requestedFeature_ != io.grpc.examples.helloworld.RequestedFeature.REQUESTED_FEATURE_INVALID.getNumber()) {
+      output.writeEnum(4, requestedFeature_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -203,6 +232,10 @@ private static final long serialVersionUID = 0L;
     if (alive_ != false) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(3, alive_);
+    }
+    if (requestedFeature_ != io.grpc.examples.helloworld.RequestedFeature.REQUESTED_FEATURE_INVALID.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(4, requestedFeature_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -225,6 +258,7 @@ private static final long serialVersionUID = 0L;
         != other.getValue()) return false;
     if (getAlive()
         != other.getAlive()) return false;
+    if (requestedFeature_ != other.requestedFeature_) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -243,6 +277,8 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + ALIVE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getAlive());
+    hash = (37 * hash) + REQUESTED_FEATURE_FIELD_NUMBER;
+    hash = (53 * hash) + requestedFeature_;
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -386,6 +422,8 @@ private static final long serialVersionUID = 0L;
 
       alive_ = false;
 
+      requestedFeature_ = 0;
+
       return this;
     }
 
@@ -415,6 +453,7 @@ private static final long serialVersionUID = 0L;
       result.name_ = name_;
       result.value_ = value_;
       result.alive_ = alive_;
+      result.requestedFeature_ = requestedFeature_;
       onBuilt();
       return result;
     }
@@ -472,6 +511,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getAlive() != false) {
         setAlive(other.getAlive());
+      }
+      if (other.requestedFeature_ != 0) {
+        setRequestedFeatureValue(other.getRequestedFeatureValue());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -636,6 +678,60 @@ private static final long serialVersionUID = 0L;
     public Builder clearAlive() {
       
       alive_ = false;
+      onChanged();
+      return this;
+    }
+
+    private int requestedFeature_ = 0;
+    /**
+     * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+     * @return The enum numeric value on the wire for requestedFeature.
+     */
+    @java.lang.Override public int getRequestedFeatureValue() {
+      return requestedFeature_;
+    }
+    /**
+     * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+     * @param value The enum numeric value on the wire for requestedFeature to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRequestedFeatureValue(int value) {
+      
+      requestedFeature_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+     * @return The requestedFeature.
+     */
+    @java.lang.Override
+    public io.grpc.examples.helloworld.RequestedFeature getRequestedFeature() {
+      @SuppressWarnings("deprecation")
+      io.grpc.examples.helloworld.RequestedFeature result = io.grpc.examples.helloworld.RequestedFeature.valueOf(requestedFeature_);
+      return result == null ? io.grpc.examples.helloworld.RequestedFeature.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+     * @param value The requestedFeature to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRequestedFeature(io.grpc.examples.helloworld.RequestedFeature value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      requestedFeature_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.helloworld.RequestedFeature requested_feature = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRequestedFeature() {
+      
+      requestedFeature_ = 0;
       onChanged();
       return this;
     }

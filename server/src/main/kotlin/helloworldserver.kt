@@ -5,18 +5,28 @@ import io.grpc.examples.helloworld.HelloRequest
 import io.grpc.stub.StreamObserver
 
 class GreeterImpl : GreeterGrpc.GreeterImplBase() {
-  override fun sayHello(request: HelloRequest?, responseObserver: StreamObserver<HelloReply>?) {
-    val reply = HelloReply.newBuilder().setMessage("Hello ${request?.name}").build()
-    responseObserver?.onNext(reply)
-    responseObserver?.onCompleted()
-  }
+  override fun sayHello(
+    request: HelloRequest?,
+    responseObserver: StreamObserver<HelloReply>?
+  ) =
+    HelloReply
+      .newBuilder()
+      .setMessage("Hello ${request?.name}")
+      .setValue(request?.value?.let { it * 2 } ?: 0)
+      .setAlive(request?.alive ?: false)
+      .build()
+      .let { responseObserver?.onNext(it) }
+      .let { responseObserver?.onCompleted() }
+      .let { Unit }
 }
 
-fun main(args: Array<String>) {
-  val server = ServerBuilder.forPort(8082).addService(GreeterImpl()).build()
-  server.start()
-  println("Server started with args: $args")
-  Runtime.getRuntime().addShutdownHook(Thread() { println("Ups, JVM shutdown") })
-  server.awaitTermination()
-  println("Server stopped")
-}
+fun main(args: Array<String>) =
+  ServerBuilder
+    .forPort(8082)
+    .addService(GreeterImpl())
+    .build()
+    .also { it.start() }
+    .also { println("Server started with args: $args") }
+    .also { Runtime.getRuntime().addShutdownHook(Thread() { println("Ups, JVM shutdown") }) }
+    .also { it.awaitTermination() }
+    .also { println("Server stopped") }
